@@ -6,10 +6,8 @@ var AllJapaneseShrines = (function () {
   }
   return result;
 })();
-
-// 新增：通过英文名获取中文名
-var shrineChineseByEnglish = (function () {
-  var data = "\
+var shrinesToJapanese = (function () {
+  var shrines = "\
 カヤ・ミワの祠|Kaya Wan Shrine|卡亚·米瓦神庙\r\n\
 ダタ・クスの祠|Daka Tuss Shrine|达塔·库斯神庙\r\n\
 ミーズー・ヨの祠|Mezza Lo Shrine|米兹·耀神庙\r\n\
@@ -132,29 +130,11 @@ var shrineChineseByEnglish = (function () {
 タ・ムールの祠|Tah Muhl Shrine|塔·穆尔神庙\r\n\
 ".split("\r\n");
   var result = {};
-  for (var i = 0; i < data.length; i++) {
-    if (!data[i]) continue;
-    var parts = data[i].split("|");
-    if (parts.length >= 3) {
-      result[parts[1]] = parts[2]; // 英文名 -> 中文名
-    }
-  }
-  return result;
-})();
-
-// 可选：新增通过英文名获取日文名的映射（保持原结构）
-var shrineJapaneseByEnglish = (function () {
-  var data = "\
-カヤ・ミワの祠|Kaya Wan Shrine|卡亚·米瓦神庙\r\n\
-ダタ・クスの祠|Daka Tuss Shrine|达塔·库斯神庙\r\n\
-... 同上数据 ...".split("\r\n");
-  var result = {};
-  for (var i = 0; i < data.length; i++) {
-    if (!data[i]) continue;
-    var parts = data[i].split("|");
-    if (parts.length >= 2) {
-      result[parts[1]] = parts[0]; // 英文名 -> 日文名
-    }
+  for (var i = 0; i < shrines.length; i++) {
+    if (!shrines[i]) continue;
+    var shrine = shrines[i].split("|");
+    // result[shrine[1]] = shrine[0];  // 原为日文到英文
+    result[shrine[1]] = shrine[2]; // 改为英文到中文
   }
   return result;
 })();
